@@ -21,7 +21,10 @@ class Snake:
             self.coordinates.append([0,0]) 
 
         for  x , y in self.coordinates:
-            square = canvas.create_rectangle( x, y, x + SPACE_SIZE , y +  SPACE_SIZE , fill=SNAKE_COLOR , tag="snake")
+            square = canvas.create_rectangle( x, y, x + SPACE_SIZE ,
+                                            y +  SPACE_SIZE ,
+                                            fill=SNAKE_COLOR ,
+                                            tag="snake")
             self.squares.append(square)
 
 class Food:
@@ -32,27 +35,30 @@ class Food:
 
         self.coordinates = [x,y]
 
-        canvas.create_oval(x,y, x + SPACE_SIZE, y + SPACE_SIZE, fill=FOOD_COLOR,tag="food")
+        canvas.create_oval(x,y, x + SPACE_SIZE,
+                        y + SPACE_SIZE,
+                        fill=FOOD_COLOR,
+                        tag="food")
 
 
 
 def next_turn(snake,food):
+    print(snake.coordinates)
     x, y = snake.coordinates[0]
 
     if direction == "up":
         y -= SPACE_SIZE
     elif direction == "down":
-        y + SPACE_SIZE
+        y += SPACE_SIZE
     elif direction == "left":
         x -= SPACE_SIZE
     elif direction == "right":
         x += SPACE_SIZE 
 
-    
-
     snake.coordinates.insert(0,(x,y))
 
-    square = canvas.create_rectangle(x,y,x + SPACE_SIZE,y+SPACE_SIZE,fill=SNAKE_COLOR)
+    square = canvas.create_rectangle(x,y,x + SPACE_SIZE,
+                                    y+SPACE_SIZE,fill=SNAKE_COLOR)
     
     snake.squares.insert(0,square)
 
@@ -84,13 +90,7 @@ def next_turn(snake,food):
 
 
 
-    del snake.coordinates[-1]
-
-    canvas.delete(snake.squares[-1])
-
-    del snake.squares[-1]
-
-    window.after(SPEED, next_turn, snake, food)
+    
 
 
 def change_direction(new_direction):
